@@ -5,29 +5,93 @@
 #' @import shiny
 #' @noRd
 app_ui <- shinyMobile::f7Page(
+  options = list(theme = "ios", dark = TRUE),
   title = "Madplan",
-  shinyMobile::f7SingleLayout(
+  shinyMobile::f7TabLayout(
     navbar = shinyMobile::f7Navbar(
-      title = "Single Layout",
+      title = "Madplan",
       hairline = FALSE,
       shadow = TRUE
     ),
-    toolbar = shinyMobile::f7Toolbar(
-      position = "bottom",
-      shinyMobile::f7Link(label = "Link 1", href = "https://www.google.com"),
-      shinyMobile::f7Link(label = "Link 2", href = "https://www.google.com")
-    ),
-    # main content
-    shinyMobile::f7Shadow(
-      intensity = 10,
-      hover = TRUE,
-      shinyMobile::f7Card(
-        title = "Card header",
-        shinyMobile::f7Slider("obs", "Number of observations", 0, 1000, 500),
-        plotOutput("distPlot"),
-        footer = tagList(
-          shinyMobile::f7Button(color = "blue", label = "My button", href = "https://www.google.com"),
-          shinyMobile::f7Badge("Badge", color = "green")
+    shinyMobile::f7Tabs(
+      animated = FALSE,
+      swipeable = TRUE,
+      shinyMobile::f7Tab(
+        tabName = "Tab 1",
+        icon = shinyMobile::f7Icon("envelope"),
+        active = TRUE,
+        shinyMobile::f7Shadow(
+          intensity = 10,
+          hover = TRUE,
+          shinyMobile::f7Card(
+            title = "Card header",
+            shinyMobile::f7Stepper(
+              "obs1",
+              "Number of observations",
+              min = 0,
+              max = 1000,
+              value = 500,
+              step = 100
+            ),
+            plotOutput("distPlot1"),
+            footer = tagList(
+              shinyMobile::f7Button(inputId = "tapHold", label = "My button"),
+              shinyMobile::f7Badge("Badge", color = "green")
+            )
+          )
+        )
+      ),
+      shinyMobile::f7Tab(
+        tabName = "Tab 2",
+        icon = shinyMobile::f7Icon("today"),
+        active = FALSE,
+        shinyMobile::f7Shadow(
+          intensity = 10,
+          hover = TRUE,
+          shinyMobile::f7Card(
+            title = "Card header",
+            shinyMobile::f7Select(
+              inputId = "obs2",
+              label = "Distribution type:",
+              choices = c(
+                "Normal" = "norm",
+                "Uniform" = "unif",
+                "Log-normal" = "lnorm",
+                "Exponential" = "exp"
+              )
+            ),
+            plotOutput("distPlot2"),
+            footer = tagList(
+              shinyMobile::f7Button(label = "My button", href = "https://www.google.com"),
+              shinyMobile::f7Badge("Badge", color = "orange")
+            )
+          )
+        )
+      ),
+      shinyMobile::f7Tab(
+        tabName = "Tab 3",
+        icon = shinyMobile::f7Icon("cloud_upload"),
+        active = FALSE,
+        shinyMobile::f7Shadow(
+          intensity = 10,
+          hover = TRUE,
+          shinyMobile::f7Card(
+            title = "Card header",
+            shinyMobile::f7SmartSelect(
+              inputId = "variable",
+              label = "Variables to show:",
+              c("Cylinders" = "cyl",
+                "Transmission" = "am",
+                "Gears" = "gear"),
+              multiple = TRUE,
+              selected = "cyl"
+            ),
+            tableOutput("data"),
+            footer = tagList(
+              shinyMobile::f7Button(label = "My button", href = "https://www.google.com"),
+              shinyMobile::f7Badge("Badge", color = "green")
+            )
+          )
         )
       )
     )
