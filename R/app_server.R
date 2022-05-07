@@ -4,7 +4,11 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @noRd
-app_server <- function( input, output, session ) {
-  # Your application server logic 
+app_server <- function(input, output, session) {
+  
+  output$distPlot <- renderPlot({
+    dist <- rnorm(input$obs)
+    hist(dist)
+  })
   
 }

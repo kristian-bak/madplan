@@ -4,16 +4,35 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @noRd
-app_ui <- function(request) {
-  tagList(
-    # Leave this function for adding external resources
-    golem_add_external_resources(),
-    # Your application UI logic 
-    fluidPage(
-      h1("madplan")
+app_ui <- shinyMobile::f7Page(
+  title = "Single layout",
+  shinyMobile::f7SingleLayout(
+    navbar = shinyMobile::f7Navbar(
+      title = "Single Layout",
+      hairline = FALSE,
+      shadow = TRUE
+    ),
+    toolbar = shinyMobile::f7Toolbar(
+      position = "bottom",
+      shinyMobile::f7Link(label = "Link 1", href = "https://www.google.com"),
+      shinyMobile::f7Link(label = "Link 2", href = "https://www.google.com")
+    ),
+    # main content
+    shinyMobile::f7Shadow(
+      intensity = 10,
+      hover = TRUE,
+      shinyMobile::f7Card(
+        title = "Card header",
+        shinyMobile::f7Slider("obs", "Number of observations", 0, 1000, 500),
+        plotOutput("distPlot"),
+        footer = tagList(
+          shinyMobile::f7Button(color = "blue", label = "My button", href = "https://www.google.com"),
+          shinyMobile::f7Badge("Badge", color = "green")
+        )
+      )
     )
   )
-}
+)
 
 #' Add external Resources to the Application
 #' 
