@@ -5,7 +5,7 @@
 #' @import shiny
 #' @noRd
 app_ui <- shinyMobile::f7Page(
-  title = "Single layout",
+  title = "Madplan",
   shinyMobile::f7SingleLayout(
     navbar = shinyMobile::f7Navbar(
       title = "Single Layout",
