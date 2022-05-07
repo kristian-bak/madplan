@@ -5,25 +5,17 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
-  output$distPlot1 <- renderPlot({
-    dist <- rnorm(input$obs1)
-    hist(dist)
-  })
   
-  output$distPlot2 <- renderPlot({
-    dist <- switch(
-      input$obs2,
-      norm = rnorm,
-      unif = runif,
-      lnorm = rlnorm,
-      exp = rexp,
-      rnorm
+  observeEvent(input$go_save, {
+    
+    shiny::showNotification(
+      ui = "Madplanen er gemt", 
+      duration = 2.5, 
+      type = "message", 
+      session = session, 
+      closeButton = TRUE
     )
     
-    hist(dist(500))
   })
   
-  output$data <- renderTable({
-    mtcars[, c("mpg", input$variable), drop = FALSE]
-  }, rownames = TRUE)
 }
