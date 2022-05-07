@@ -6,7 +6,18 @@
 #' @noRd
 app_server <- function(input, output, session) {
   
+  init_food_plan()
+  
+  data <- load_food_plan()
+  
   observeEvent(input$go_save, {
+    
+    save_food_plan(
+      date = input$pick_date, 
+      breakfast = input$type_breakfast, 
+      lunch = input$type_lunch, 
+      dinner = input$type_dinner
+    )
     
     shiny::showNotification(
       ui = "Madplanen er gemt", 
@@ -17,5 +28,36 @@ app_server <- function(input, output, session) {
     )
     
   })
+  
+  date_selected <- reactive({
+    
+    as.Date(input$pick_date)
+    
+  })
+  
+  breakfast <- reactive({
+    
+    pull_subset(data = data, var = "Breakfast", Date == date_selected())
+    
+  })
+  
+  lunch <- reactive({
+    
+    pull_subset(data = data, var = "Lunch", Date == date_selected())
+    
+  })
+  
+  dinner <- reactive({
+    
+    pull_subset(data = data, var = "Dinner", Date == date_selected())
+    
+  })
+  
+  observe({
+    shinyMobile::updateF7TextArea(inputId = "type_breakfast", value = breakfast())
+    shinyMobile::updateF7TextArea(inputId = "type_lunch", value = lunch())
+    shinyMobile::updateF7TextArea(inputId = "type_dinner", value = dinner())
+  })
+
   
 }

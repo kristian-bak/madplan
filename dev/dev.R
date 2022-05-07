@@ -2,8 +2,17 @@
 ## Document and reload
 golem::document_and_reload()
 
+## Load all functions
+devtools::load_all()
+
 ## Run app
 run_app()
+
+## Bump version
+usethis::use_version()
+
+## Add test
+usethis::use_test("load_food_plan")
 
 ## Add dependency
 usethis::use_package("shiny")
@@ -16,3 +25,6 @@ renv::status()
 
 ## Deploy
 rsconnect::deployApp()
+
+## Adding NEWS file
+usethis::use_news_md()
