@@ -8,16 +8,18 @@ app_server <- function(input, output, session) {
   
   init_food_plan()
   
-  data <- load_food_plan()
+  react_var <- reactiveValues(data = load_food_plan())
   
   observeEvent(input$go_save, {
     
-    save_food_plan(
+    df_saved <- save_food_plan(
       date = input$pick_date, 
       breakfast = input$type_breakfast, 
       lunch = input$type_lunch, 
       dinner = input$type_dinner
     )
+    
+    react_var$data <- dplyr::bind_rows(react_var$data, df_saved$df_input)
     
     shiny::showNotification(
       ui = "Madplanen er gemt", 
@@ -37,19 +39,19 @@ app_server <- function(input, output, session) {
   
   breakfast <- reactive({
     
-    pull_subset(data = data, var = "Breakfast", Date == date_selected())
+    pull_subset(data = react_var$data, var = "Breakfast", Date == date_selected())
     
   })
   
   lunch <- reactive({
     
-    pull_subset(data = data, var = "Lunch", Date == date_selected())
+    pull_subset(data = react_var$data, var = "Lunch", Date == date_selected())
     
   })
   
   dinner <- reactive({
     
-    pull_subset(data = data, var = "Dinner", Date == date_selected())
+    pull_subset(data = react_var$data, var = "Dinner", Date == date_selected())
     
   })
   

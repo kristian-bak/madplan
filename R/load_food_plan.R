@@ -9,7 +9,14 @@ load_food_plan <- function() {
     return(empty_food_plan())
   }
   
-  read.table(file = file_name, header = TRUE, sep = ";")
+  read.table(file = file_name, header = TRUE, sep = ";", 
+             colClasses = c("Date", "character", "character", "character")) %>% 
+    dplyr::as_tibble() %>% 
+    dplyr::mutate(
+      Breakfast = replace_eol(x = Breakfast, old = "--break--", new = "\\\n"),
+      Lunch     = replace_eol(x = Lunch, old = "--break--", new = "\\\n"), 
+      Dinner    = replace_eol(x = Dinner, old = "--break--", new = "\\\n")
+    )
   
 }
 

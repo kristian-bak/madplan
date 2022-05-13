@@ -10,7 +10,7 @@ init_food_plan <- function() {
     return()
   }
   
-  df_init <- data.frame(
+  df_init <- dplyr::tibble(
     Date = as.Date(character(0)),
     Breakfast = character(),
     Lunch = character(),

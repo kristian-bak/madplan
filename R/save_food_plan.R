@@ -7,20 +7,30 @@
 #' 
 save_food_plan <- function(date, breakfast, lunch, dinner) {
   
-  df_new <- dplyr::tibble(
+  df_input <- dplyr::tibble(
     Date = date %>% as.Date(), 
-    Breakfast = breakfast, 
-    Lunch = lunch, 
+    Breakfast = breakfast,
+    Lunch = lunch,
     Dinner = dinner
   )
+  
+  df_saved <- df_input %>% 
+    dplyr::mutate(    
+      Breakfast = Breakfast %>% replace_eol(old = "\\\n", new = "--break--"), 
+      Lunch = Lunch %>% replace_eol(old = "\\\n", new = "--break--"), 
+      Dinner = Dinner %>% replace_eol(old = "\\\n", new = "--break--")
+    )
   
   file_name_txt <- "data.txt"
   
   file_txt <- paste0("data/", file_name_txt)
   
-  write.table(x = df_new, file = file_txt,  
+  write.table(x = df_saved, file = "data/data.txt",  
               append = TRUE, quote = FALSE, row.names = FALSE, col.names = FALSE, sep = ";")
   
-  return(invisible(TRUE))
+  out <- list("df_input" = df_input, 
+              "df_saved" = df_saved)
+  
+  return(out)
   
 }
