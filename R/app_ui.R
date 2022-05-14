@@ -6,7 +6,7 @@
 #' @noRd
 app_ui <- shinyMobile::f7Page(
   
-  options = list(theme = "ios", dark = TRUE),
+  options = list(theme = "ios", dark = TRUE, pullToRefresh = TRUE),
   
   title = "Madplan",
   
@@ -31,7 +31,10 @@ app_ui <- shinyMobile::f7Page(
         shinyMobile::f7TextArea(inputId = "type_breakfast", label = "Morgenmad"),
         shinyMobile::f7TextArea(inputId = "type_lunch", label = "Middagsmad"),
         shinyMobile::f7TextArea(inputId = "type_dinner", label = "Aftensmad"),
-        shinyMobile::f7Button(inputId = "go_save", label = "Gem")
+        shinyMobile::f7Button(inputId = "go_save", label = "Gem"),
+        shinyjs::useShinyjs(),
+        shinyMobile::f7DownloadButton(outputId = "download_data", label = "Download", 
+                                      style = "background: red")
       ),
       
       shinyMobile::f7Tab(

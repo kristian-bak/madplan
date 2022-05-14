@@ -21,12 +21,19 @@ app_server <- function(input, output, session) {
     
     react_var$data <- dplyr::bind_rows(react_var$data, df_saved$df_input)
     
-    shiny::showNotification(
-      ui = "Madplanen er gemt", 
-      duration = 2.5, 
-      type = "message", 
-      session = session, 
-      closeButton = TRUE
+    #shiny::showNotification(
+    #  ui = "Madplanen er gemt", 
+    #  duration = 2.5, 
+    #  type = "message", 
+    #  session = session, 
+    #  closeButton = TRUE
+    #)
+    
+    shinyMobile::f7Notif(
+      icon = shinyMobile::f7Icon("checkmark"),
+      title = "Gemt",
+      text = "",
+      titleRightText = ""
     )
     
   })
@@ -60,6 +67,24 @@ app_server <- function(input, output, session) {
     shinyMobile::updateF7TextArea(inputId = "type_lunch", value = lunch())
     shinyMobile::updateF7TextArea(inputId = "type_dinner", value = dinner())
   })
-
   
+  output$download_data <- downloadHandler(
+    filename = function() {
+      "data.txt"
+    },
+    content = function(file) {
+      download_food_plan(data = react_var$data, file = file)
+    }
+  )
+  
+  observe({
+    
+    req(input$deviceInfo$os)
+    
+    if (input$deviceInfo$os != "windows") {
+      shinyjs::hide(id = "download_data")
+    }
+    
+  })
+
 }
