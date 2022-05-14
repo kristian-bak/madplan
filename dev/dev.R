@@ -18,6 +18,7 @@ usethis::use_test("load_food_plan")
 usethis::use_package("shiny")
 usethis::use_package("shinyMobile")
 usethis::use_package("shinyWidgets")
+usethis::use_package("shinyjs")
 usethis::use_package("dplyr")
 
 ## Renv

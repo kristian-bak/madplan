@@ -33,8 +33,10 @@ app_ui <- shinyMobile::f7Page(
         shinyMobile::f7TextArea(inputId = "type_dinner", label = "Aftensmad"),
         shinyMobile::f7Button(inputId = "go_save", label = "Gem"),
         shinyjs::useShinyjs(),
-        shinyMobile::f7DownloadButton(outputId = "download_data", label = "Download", 
-                                      style = "background: red")
+        shinyjs::hidden(
+          shinyMobile::f7DownloadButton(outputId = "download_data", label = "Download", 
+                                        style = "background: red")
+        )
       ),
       
       shinyMobile::f7Tab(

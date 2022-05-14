@@ -81,8 +81,8 @@ app_server <- function(input, output, session) {
     
     req(input$deviceInfo$os)
     
-    if (input$deviceInfo$os != "windows") {
-      shinyjs::hide(id = "download_data")
+    if (input$deviceInfo$os == "windows") {
+      shinyjs::show(id = "download_data")
     }
     
   })

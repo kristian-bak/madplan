@@ -1,3 +1,7 @@
+# madplan 0.2.1
+
+* Hiding download button for windows (i.e. desktop)
+
 # madplan 0.2.0
 
 Made the following changes:
