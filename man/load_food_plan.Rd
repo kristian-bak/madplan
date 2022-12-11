@@ -4,7 +4,10 @@
 \alias{load_food_plan}
 \title{Load food plan}
 \usage{
-load_food_plan()
+load_food_plan(token)
+}
+\arguments{
+\item{token}{token, output from drop_auth_refreshable}
 }
 \value{
 tibble with existing food plan (empty food plan if non-existing)

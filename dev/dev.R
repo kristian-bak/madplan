@@ -11,6 +11,9 @@ run_app()
 ## Bump version
 usethis::use_version()
 
+## Run tests
+devtools::test()
+
 ## Add test
 usethis::use_test("load_food_plan")
 
@@ -20,6 +23,8 @@ usethis::use_package("shinyMobile")
 usethis::use_package("shinyWidgets")
 usethis::use_package("shinyjs")
 usethis::use_package("dplyr")
+usethis::use_package("rdrop2")
+usethis::use_package("lubridate")
 
 ## Renv
 renv::init()

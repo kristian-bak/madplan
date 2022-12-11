@@ -6,6 +6,9 @@
 \usage{
 delete_food_plan()
 }
+\arguments{
+\item{token}{token, output from drop_auth_refreshable}
+}
 \description{
 Delete food plan
 }

@@ -3,9 +3,12 @@
 #' @param breakfast character string with information on breaskfast
 #' @param lunch character string with information on lunch 
 #' @param dinner character string with information on dinner 
-#' @return invisible TRUE
+#' @param token token, output from drop_auth_refreshable
+#' @return named list with:
+#' * df_input: tibble with all inputs
+#' * df_saved: tibble with inputs modified according to `replace_eol`
 #' 
-save_food_plan <- function(date, breakfast, lunch, dinner) {
+save_food_plan <- function(date, breakfast, lunch, dinner, token) {
   
   df_input <- dplyr::tibble(
     Date = date %>% as.Date(), 
@@ -27,6 +30,8 @@ save_food_plan <- function(date, breakfast, lunch, dinner) {
   
   write.table(x = df_saved, file = "data/data.txt",  
               append = TRUE, quote = FALSE, row.names = FALSE, col.names = FALSE, sep = ";")
+  
+  rdrop2::drop_upload(file = "data/data.txt", dtoken = token)
   
   out <- list("df_input" = df_input, 
               "df_saved" = df_saved)

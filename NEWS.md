@@ -1,3 +1,11 @@
+# madplan 0.4.0
+
+* Trying to using refreshable tokens
+
+# madplan 0.3.0
+
+* Using dropbox as database
+
 # madplan 0.2.1
 
 * Hiding download button for windows (i.e. desktop)

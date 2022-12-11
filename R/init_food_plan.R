@@ -1,6 +1,6 @@
 #' Initialize food plan
-#' 
-init_food_plan <- function() {
+#' @param token token, output from drop_auth_refreshable
+init_food_plan <- function(token) {
   
   file_name_txt <- "data.txt"
   
@@ -25,5 +25,9 @@ init_food_plan <- function() {
     col.names = TRUE, 
     sep = ";"
   )
+  
+  if (!rdrop2::drop_exists(path = "/data.txt")) {
+    rdrop2::drop_upload(file = file_txt, dtoken = token)
+  }
   
 }

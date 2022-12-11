@@ -1,7 +1,8 @@
 #' Load food plan
+#' @param token token, output from drop_auth_refreshable
 #' @return tibble with existing food plan (empty food plan if non-existing)
 #' 
-load_food_plan <- function() {
+load_food_plan <- function(token) {
   
   file_name <- get_file_name()
   
@@ -9,7 +10,12 @@ load_food_plan <- function() {
     return(empty_food_plan())
   }
   
-  read.table(file = file_name, header = TRUE, sep = ";", 
+  destfile <- tempfile()
+  #dtoken <- "./dev/token.RDS"
+  #token <- readRDS("dev/token.RDS")
+  rdrop2::drop_download(path = "/data.txt", local_path = destfile, overwrite = TRUE, dtoken = token)
+  
+  read.table(file = destfile, header = TRUE, sep = ";", 
              colClasses = c("Date", "character", "character", "character")) %>% 
     dplyr::as_tibble() %>% 
     dplyr::mutate(

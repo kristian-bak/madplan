@@ -4,7 +4,7 @@
 \alias{save_food_plan}
 \title{Save food plan}
 \usage{
-save_food_plan(date, breakfast, lunch, dinner)
+save_food_plan(date, breakfast, lunch, dinner, token)
 }
 \arguments{
 \item{date}{date in the format yyyy-mm-dd}
@@ -14,9 +14,13 @@ save_food_plan(date, breakfast, lunch, dinner)
 \item{lunch}{character string with information on lunch}
 
 \item{dinner}{character string with information on dinner}
+
+\item{token}{token, output from drop_auth_refreshable}
 }
 \value{
-invisible TRUE
+named list with:
+* df_input: tibble with all inputs
+* df_saved: tibble with inputs modified according to `replace_eol`
 }
 \description{
 Save food plan

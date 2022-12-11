@@ -4,7 +4,14 @@
 \alias{download_food_plan}
 \title{Download food plan}
 \usage{
-download_food_plan(data, file)
+download_food_plan(data, file, token)
+}
+\arguments{
+\item{data}{tibble with food plan}
+
+\item{file}{character string}
+
+\item{token}{token, output from drop_auth_refreshable}
 }
 \description{
 Download food plan

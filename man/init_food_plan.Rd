@@ -4,7 +4,10 @@
 \alias{init_food_plan}
 \title{Initialize food plan}
 \usage{
-init_food_plan()
+init_food_plan(token)
+}
+\arguments{
+\item{token}{token, output from drop_auth_refreshable}
 }
 \description{
 Initialize food plan

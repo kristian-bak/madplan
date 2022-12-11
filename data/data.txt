@@ -1,1 +1,7 @@
 Date;Breakfast;Lunch;Dinner
+2022-05-16;;;test
+2022-05-15;;rug;
+2022-05-16;;test;test
+2022-05-16;;test;test
+2022-05-16;;test;testagain
+2022-12-11;;nyt test efter refreshable token;

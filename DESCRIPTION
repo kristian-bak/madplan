@@ -1,6 +1,6 @@
 Package: madplan
 Title: An Amazing Shiny App
-Version: 0.2.1
+Version: 0.4.0
 Authors@R: 
     person(given = "firstname",
            family = "lastname",
@@ -12,7 +12,9 @@ Imports:
     config (>= 0.3.1),
     dplyr,
     golem (>= 0.3.1),
+    lubridate,
     magrittr,
+    rdrop2,
     shiny (>= 1.7.1),
     shinyjs,
     shinyMobile,
